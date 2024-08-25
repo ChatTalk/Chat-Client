@@ -13,7 +13,7 @@ const SignUp: React.FC = () => {
     event.preventDefault();
 
     if (password !== checkPassword) {
-      setError('Passwords do not match.');
+      setError('패스원드 불일치');
       return;
     }
 
@@ -27,14 +27,14 @@ const SignUp: React.FC = () => {
       });
 
       if (response.ok) {
-        alert('Sign up successful!');
-        window.location.href = '/';
+        alert('회원가입 성공');
+        // window.location.href = '/'; 라우팅으로 리팩토링하기
       } else {
         const data = await response.json();
-        setError(data.message || 'Sign up failed.');
+        setError(data.message || '회원가입 실패');
       }
     } catch (error) {
-      setError('Network error. Please try again.');
+      setError('네트워크 에러, 재시도 및 재확인 필요');
     }
   };
 

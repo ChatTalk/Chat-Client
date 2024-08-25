@@ -21,12 +21,12 @@ const SignIn: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
-        window.location.href = '/auctions';
+        // window.location.href = '/auctions';
       } else {
-        setError(data.message || 'Login failed.');
+        setError(data.message || '회원가입 실패');
       }
     } catch (error) {
-      setError('Network error. Please try again.');
+      setError('네트워크 에러, 재시도 및 재확인 필요');
     }
   };
 
@@ -37,7 +37,7 @@ const SignIn: React.FC = () => {
       <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       <div>
-        {/* <a href="#">Forget Your Password?</a> */}
+        {/* <a href="#">Forget Your Password?</a> 라우팅으로 리팩토링하기 */}
       </div>
       <button type="submit">Sign In</button>
       {error && <ErrorText>{error}</ErrorText>}
