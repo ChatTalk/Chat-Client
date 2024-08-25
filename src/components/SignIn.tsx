@@ -21,7 +21,7 @@ const SignIn: React.FC = () => {
       await dispatch(loginUser(formData)).unwrap();
       navigate('/test');
     } catch (error) {
-      setError('로그인 실패');
+      setError('네트워크 에러, 재시도 및 재확인 필요');
     }
   };
 
