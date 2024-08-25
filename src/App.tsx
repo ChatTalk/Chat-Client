@@ -1,10 +1,14 @@
-import './App.css';
+import React from 'react';
+import AuthPage from './pages/AuthPage';
+import GlobalStyles from './styles/GlobalStyles';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-    </div>
+    <>
+      <GlobalStyles />
+      <AuthPage />
+    </>
   );
-}
+};
 
 export default App;
