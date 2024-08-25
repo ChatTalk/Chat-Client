@@ -82,6 +82,6 @@ export const Form = styled.form`
 `;
 
 export const ErrorText = styled.div`
-  color: red;
+  color: ${props => props.color || 'red'};
   margin-top: 1rem;
 `;

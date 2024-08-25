@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, ErrorText } from '../styles/AuthStyles';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { signUp } from '../api/api';
 
 const SignUp: React.FC = () => {
@@ -11,7 +11,7 @@ const SignUp: React.FC = () => {
   const [role, setRole] = useState('');
   const [error, setError] = useState('');
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -28,7 +28,7 @@ const SignUp: React.FC = () => {
   
         if (response.status === 200) {
           alert("회원가입 성공");
-          navigate('/');
+          setError("회원가입 성공, 로그인하세요")
         } else {
           setError(response.data.message || '회원가입 실패');
         }
@@ -36,6 +36,13 @@ const SignUp: React.FC = () => {
         setError('네트워크 에러, 재시도 및 재확인 필요');
       }
     };
+
+  const getErrorColor = (errorText: string) => {
+    if (errorText === '회원가입 성공, 로그인하세요') {
+      return 'green'; // 특정 텍스트일 경우 초록색
+    }
+    return 'red'; // 기본 색상
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -51,7 +58,7 @@ const SignUp: React.FC = () => {
         <option value="ADMIN">Admin</option>
       </select>
       <button type="submit">Sign Up</button>
-      {error && <ErrorText>{error}</ErrorText>}
+      {error && <ErrorText color={getErrorColor(error)}>{error}</ErrorText>}
     </Form>
   );
 };
