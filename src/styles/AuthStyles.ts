@@ -2,27 +2,37 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f8f9fa;  /* Optional: Background color to contrast panels */
+  background-color: #f8f9fa;
+  overflow: hidden;
 `;
 
-export const FormContainer = styled.div`
+export const FormWrapper = styled.div<{ isSignUp: boolean }>`
   display: flex;
-  flex-direction: column;
   width: 30rem;
   max-width: 800px;
-  margin: auto;
-  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+`;
+
+export const FormContainer = styled.div<{ isSignUp: boolean }>`
+  display: flex;
+  justify-content: center;
+  min-width: 100%;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease-in-out;
+  transform: ${({ isSignUp }) => (isSignUp ? 'translateX(-100%)' : 'translateX(0)')};
 `;
 
 export const ToggleContainer = styled.div`
-  height: 6rem;
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  margin-bottom: 1rem;  /* Add margin to separate from the form */
+  width: 30rem;
+  margin-top: 2rem;
 `;
 
 export const TogglePanel = styled.div<{ active: boolean }>`
@@ -41,19 +51,18 @@ export const TogglePanel = styled.div<{ active: boolean }>`
 `;
 
 export const TogglePanelPharse = styled.div`
-  margin: 0.5rem
-`
+  margin: 0.5rem;
+`;
 
 export const TogglePanelIntroduce = styled.p`
-  margin: 0.5rem
-`
+  margin: 0.5rem;
+`;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  // align-items: center;
   flex: 1;
   padding: 2rem;
   background-color: white;

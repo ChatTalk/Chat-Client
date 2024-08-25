@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import SignUp from '../components/SignUp';
 import SignIn from '../components/SignIn';
-import { Container, FormContainer, ToggleContainer, TogglePanel, TogglePanelIntroduce, TogglePanelPharse } from '../styles/AuthStyles';
+import { Container, FormWrapper, FormContainer, ToggleContainer, TogglePanel, TogglePanelIntroduce, TogglePanelPharse } from '../styles/AuthStyles';
 
 const AuthPage: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
   return (
     <Container>
-      <FormContainer>
-        {isSignUp ? <SignUp /> : <SignIn />}
-        <ToggleContainer>
+      <FormWrapper isSignUp={isSignUp}>
+        <FormContainer isSignUp={isSignUp}>
+          <SignIn />
+        </FormContainer>
+        <FormContainer isSignUp={isSignUp}>
+          <SignUp />
+        </FormContainer>
+      </FormWrapper>
+      <ToggleContainer>
           { isSignUp && (
             <TogglePanel
               onClick={() => setIsSignUp(false)}
@@ -29,8 +35,7 @@ const AuthPage: React.FC = () => {
               <TogglePanelIntroduce>아직 계정이 없으시면 회원가입하세요!</TogglePanelIntroduce>
             </TogglePanel>
           )}
-        </ToggleContainer>
-      </FormContainer>
+      </ToggleContainer>
     </Container>
   );
 };
