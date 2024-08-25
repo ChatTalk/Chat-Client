@@ -22,7 +22,7 @@ const AuthPage: React.FC = () => {
               onClick={() => setIsSignUp(false)}
               active={!isSignUp}
             >
-              <TogglePanelPharse>Log In</TogglePanelPharse>
+              <TogglePanelPharse>Sign In</TogglePanelPharse>
               <TogglePanelIntroduce>이미 회원이면 얼른 대화에 참여하세요!</TogglePanelIntroduce>
             </TogglePanel>
           )}
