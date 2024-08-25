@@ -15,9 +15,10 @@ const SignIn: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
     try {
       const response = await axios.post('/api/users/login', { email, password });
       dispatch(setUser(response.data));
-      window.location.href = '/auctions';
+    //   window.location.href = '/auctions';
     } catch (err) {
-      setError('Login failed. Please check your credentials.');
+      setError('로그인 실패, 입력 정보 재확인 요망');
+      alert(error)
     }
   };
 

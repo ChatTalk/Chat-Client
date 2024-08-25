@@ -9,12 +9,12 @@ const SignUp: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
   const [checkPassword, setCheckPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [role, setRole] = useState('');
-  const [_, setError] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (password !== checkPassword) {
-      alert('Passwords do not match.');
+      alert('암호가 일치하지 않음');
       return;
     }
     try {
@@ -22,7 +22,8 @@ const SignUp: React.FC<{ onSwitch: () => void }> = ({ onSwitch }) => {
       alert('Sign Up successful');
       window.location.href = '/';
     } catch (err) {
-      setError('Sign up failed. Please check your information.');
+      setError('회원가입 실패, 입력 정보 재확인 필요');
+      alert(error)
     }
   };
 
