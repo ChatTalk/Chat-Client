@@ -2,16 +2,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import { logout } from '../redux/userSlice';
+import { logoutUser } from '../redux/userSlice';
 
 const TestPage: React.FC = () => {
   const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate('/');
+  const handleLogout = async () => {
+    try {
+      await dispatch(logoutUser()).unwrap();  // 로그아웃 요청 디스패치
+      navigate('/');  // 로그아웃 후 홈으로 이동
+    } catch (error) {
+      console.error('로그아웃 중 오류 발생:', error);
+    }
   };
 
   if (user.status === 'loading') {

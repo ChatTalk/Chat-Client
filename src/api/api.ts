@@ -14,3 +14,5 @@ export const signUp = (data: { email: string; password: string; phone: string; r
 export const signIn = (data: { email: string; password: string }) =>
   api.post('users/login', data);
 
+export const signOut = () => 
+  api.post('users/logout'); 
