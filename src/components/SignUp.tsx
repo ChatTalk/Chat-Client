@@ -2,28 +2,54 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Form = styled.form`
+  background-color: #fff;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  width: 300px;
+  padding: 0 40px;
+  height: 100%;
 `;
 
 const Input = styled.input`
-  margin-bottom: 10px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background-color: #eee;
+  border: none;
+  margin: 8px 0;
+  padding: 10px 15px;
+  font-size: 13px;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
 `;
 
 const Button = styled.button`
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  background-color: #4c8bf5;
+  color: #fff;
+  font-size: 15px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease, cursor 0.3s ease;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #3b73e8;
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: #2d5acc;
+    transform: scale(0.95);
+    cursor: grabbing;
+  }
+
+  &.hidden {
+    background-color: transparent;
+    border-color: #fff;
   }
 `;
 
@@ -71,6 +97,7 @@ const SignUp: React.FC = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <h1>Sign Up</h1>
+      <span>use your email for registration</span>
       <Input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
       <Input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
       <Input type="password" name="checkPassword" placeholder="Check Password" value={formData.checkPassword} onChange={handleChange} required />
