@@ -10,7 +10,8 @@ export const Container = styled.div`
 
 export const FormContainer = styled.div`
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  width: 30rem;
   max-width: 800px;
   margin: auto;
   transition: transform 0.3s ease-in-out;
@@ -39,6 +40,8 @@ export const TogglePanel = styled.div<{ active: boolean }>`
 `;
 
 export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
   flex: 1;
   padding: 2rem;
   background-color: white;
