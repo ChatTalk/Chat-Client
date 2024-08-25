@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Form, ErrorText } from '../styles/AuthStyles';
+import { useNavigate } from 'react-router-dom';
+import { signUp } from '../api/api';
 
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -9,34 +11,31 @@ const SignUp: React.FC = () => {
   const [role, setRole] = useState('');
   const [error, setError] = useState('');
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (password !== checkPassword) {
-      setError('패스원드 불일치');
+      setError('패스워드 불일치');
       return;
     }
 
     const formData = { email, password, phone, role };
 
     try {
-      const response = await fetch('/api/users/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        alert('회원가입 성공');
-        // window.location.href = '/'; 라우팅으로 리팩토링하기
-      } else {
-        const data = await response.json();
-        setError(data.message || '회원가입 실패');
+        const response = await signUp(formData);
+  
+        if (response.status === 200) {
+          alert("회원가입 성공");
+          navigate('/');
+        } else {
+          setError(response.data.message || '회원가입 실패');
+        }
+      } catch (error) {
+        setError('네트워크 에러, 재시도 및 재확인 필요');
       }
-    } catch (error) {
-      setError('네트워크 에러, 재시도 및 재확인 필요');
-    }
-  };
+    };
 
   return (
     <Form onSubmit={handleSubmit}>

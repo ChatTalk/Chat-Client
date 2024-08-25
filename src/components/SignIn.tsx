@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Form, ErrorText } from '../styles/AuthStyles';
+import { useNavigate } from 'react-router-dom';
+import { signIn } from '../api/api';
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -12,18 +16,13 @@ const SignIn: React.FC = () => {
     const formData = { email, password };
 
     try {
-      const response = await fetch('/api/users/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+      const response = await signIn(formData);
 
-      const data = await response.json();
-
-      if (response.ok) {
-        // window.location.href = '/auctions';
+      if (response.status === 200) {
+        alert("로그인 성공")
+        navigate('/test');
       } else {
-        setError(data.message || '회원가입 실패');
+        setError(response.data.message || '로그인 실패');
       }
     } catch (error) {
       setError('네트워크 에러, 재시도 및 재확인 필요');
