@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Form, ErrorText } from '../styles/AuthStyles';
 import { useNavigate } from 'react-router-dom';
-import { signIn } from '../api/api';
+import { useAppDispatch } from '../redux/hooks';
+import { loginUser } from '../redux/userSlice';
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +10,7 @@ const SignIn: React.FC = () => {
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -16,16 +18,10 @@ const SignIn: React.FC = () => {
     const formData = { email, password };
 
     try {
-      const response = await signIn(formData);
-
-      if (response.status === 200) {
-        alert("로그인 성공")
-        navigate('/test');
-      } else {
-        setError(response.data.message || '로그인 실패');
-      }
+      await dispatch(loginUser(formData)).unwrap();
+      navigate('/test');
     } catch (error) {
-      setError('네트워크 에러, 재시도 및 재확인 필요');
+      setError('로그인 실패');
     }
   };
 
