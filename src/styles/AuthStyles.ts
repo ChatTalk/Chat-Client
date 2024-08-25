@@ -18,6 +18,7 @@ export const FormContainer = styled.div`
 `;
 
 export const ToggleContainer = styled.div`
+  height: 6rem;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -39,9 +40,20 @@ export const TogglePanel = styled.div<{ active: boolean }>`
   }
 `;
 
+export const TogglePanelPharse = styled.div`
+  margin: 0.5rem
+`
+
+export const TogglePanelIntroduce = styled.p`
+  margin: 0.5rem
+`
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  // align-items: center;
   flex: 1;
   padding: 2rem;
   background-color: white;

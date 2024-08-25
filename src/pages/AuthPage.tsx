@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SignUp from '../components/SignUp';
 import SignIn from '../components/SignIn';
-import { Container, FormContainer, ToggleContainer, TogglePanel } from '../styles/AuthStyles';
+import { Container, FormContainer, ToggleContainer, TogglePanel, TogglePanelIntroduce, TogglePanelPharse } from '../styles/AuthStyles';
 
 const AuthPage: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -16,8 +16,8 @@ const AuthPage: React.FC = () => {
               onClick={() => setIsSignUp(false)}
               active={!isSignUp}
             >
-              <h2>Log In</h2>
-              <p>이미 회원이면 얼른 대화에 참여하세요!</p>
+              <TogglePanelPharse>Log In</TogglePanelPharse>
+              <TogglePanelIntroduce>이미 회원이면 얼른 대화에 참여하세요!</TogglePanelIntroduce>
             </TogglePanel>
           )}
           { !isSignUp && (
@@ -25,8 +25,8 @@ const AuthPage: React.FC = () => {
               onClick={() => setIsSignUp(true)}
               active={isSignUp}
             >
-              <h2>Sign Up</h2>
-              <p>아직 계정이 없으시면 회원가입하세요!</p>
+              <TogglePanelPharse>Sign Up</TogglePanelPharse>
+              <TogglePanelIntroduce>아직 계정이 없으시면 회원가입하세요!</TogglePanelIntroduce>
             </TogglePanel>
           )}
         </ToggleContainer>
