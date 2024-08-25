@@ -8,8 +8,8 @@ const api = axios.create({
 });
 
 export const signUp = (data: { email: string; password: string; phone: string; role: string }) =>
-  api.post('/users/signup', data);
+  api.post('users/signup', data);
 
 export const signIn = (data: { email: string; password: string }) =>
-  api.post('/users/login', data);
+  api.post('users/login', data);
 
