@@ -8,18 +8,28 @@ const AuthPage: React.FC = () => {
 
   return (
     <Container>
-      <ToggleContainer>
-        <TogglePanel onClick={() => setIsSignUp(false)}>
-          <h2>Log In</h2>
-          <p>이미 회원이면 얼른 대화에 참여하세요!</p>
-        </TogglePanel>
-        <TogglePanel onClick={() => setIsSignUp(true)}>
-          <h2>Sign Up</h2>
-          <p>아직 계정이 없으시면 회원가입하세요!</p>
-        </TogglePanel>
-      </ToggleContainer>
       <FormContainer>
         {isSignUp ? <SignUp /> : <SignIn />}
+        <ToggleContainer>
+          { isSignUp && (
+            <TogglePanel
+              onClick={() => setIsSignUp(false)}
+              active={!isSignUp}
+            >
+              <h2>Log In</h2>
+              <p>이미 회원이면 얼른 대화에 참여하세요!</p>
+            </TogglePanel>
+          )}
+          { !isSignUp && (
+            <TogglePanel
+              onClick={() => setIsSignUp(true)}
+              active={isSignUp}
+            >
+              <h2>Sign Up</h2>
+              <p>아직 계정이 없으시면 회원가입하세요!</p>
+            </TogglePanel>
+          )}
+        </ToggleContainer>
       </FormContainer>
     </Container>
   );
