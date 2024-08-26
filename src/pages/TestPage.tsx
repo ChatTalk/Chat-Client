@@ -12,7 +12,7 @@ const TestPage: React.FC = () => {
   const handleLogout = async () => {
     try {
       await dispatch(logoutUser()).unwrap();  // 로그아웃 요청 디스패치
-      navigate('/');  // 로그아웃 후 홈으로 이동
+      navigate('/login');  // 로그아웃 후 홈으로 이동
     } catch (error) {
       console.error('로그아웃 중 오류 발생:', error);
     }

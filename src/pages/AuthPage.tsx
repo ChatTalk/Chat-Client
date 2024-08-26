@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SignUp from '../components/SignUp';
-import SignIn from '../components/SignIn';
+import SignUp from '../components/auth/SignUp';
+import SignIn from '../components/auth/SignIn';
 import { Container, FormWrapper, FormContainer, ToggleContainer, TogglePanel, TogglePanelIntroduce, TogglePanelPharse } from '../styles/AuthStyles';
 
 const AuthPage: React.FC = () => {
