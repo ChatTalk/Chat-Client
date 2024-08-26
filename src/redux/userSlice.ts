@@ -24,6 +24,7 @@ export const loginUser = createAsyncThunk(
       const response = await signIn(userData);
       const { user } = response.data;
       localStorage.setItem('user', JSON.stringify(user));
+      alert("로그인 성공");
       return user; 
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || '로그인 실패');
@@ -37,6 +38,7 @@ export const logoutUser = createAsyncThunk(
     try {
       await signOut();
       localStorage.removeItem('user');
+      alert("로그아웃 성공");
       return;
     } catch (error: any) {
       return rejectWithValue('로그아웃 실패');
