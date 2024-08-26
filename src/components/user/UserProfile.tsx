@@ -4,7 +4,7 @@ import { Button, ButtonContainer, ProfileImage, UserContainer, UserDetail, UserI
 import { logoutUser } from '../../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
 
-const UserProfileCard: React.FC = () => {
+const UserProfile: React.FC = () => {
     const user = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -38,4 +38,4 @@ const UserProfileCard: React.FC = () => {
     );
 };
 
-export default UserProfileCard;
+export default UserProfile;
