@@ -50,3 +50,6 @@ export const signIn = (data: { email: string; password: string }) =>
 
 export const signOut = () => 
   api.post('users/logout'); 
+
+export const test = () =>
+  api.get('users/test');
