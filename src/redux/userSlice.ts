@@ -22,38 +22,38 @@ export const loginUser = createAsyncThunk(
   async (userData: { email: string; password: string }, { rejectWithValue }) => {
     try {
       const response = await signIn(userData);
-      console.log("로그인 데이터: " + response.data)
-      // console.log("로그인 헤더: " + response.headers)
-      return response.data; 
+      const { user } = response.data;
+      localStorage.setItem('user', JSON.stringify(user));
+      return user; 
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || '로그인 실패');
     }
   }
 );
 
-
 export const logoutUser = createAsyncThunk(
   'user/logout',
   async (_, { rejectWithValue }) => {
     try {
       await signOut();
-      alert("로그아웃 성공")
-      return; 
+      localStorage.removeItem('user');
+      return;
     } catch (error: any) {
       return rejectWithValue('로그아웃 실패');
     }
   }
 );
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    logout(state) {
-      state.email = null;
-      state.phone = null;
-      state.role = null;
-      state.status = 'idle';
-      state.error = null;
+    initializeUser(state, action) {
+      const user = action.payload;
+      state.email = user.email ?? null;
+      state.phone = user.phone ?? null;
+      state.role = user.role ?? null;
+      state.status = 'succeeded';
     },
   },
   extraReducers: (builder) => {
@@ -64,18 +64,22 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        const { user } = action.payload;
-        state.email = user.email ?? null;
-        state.phone = user.phone ?? null;
-        state.role = user.role ?? null;
+        state.email = action.payload.email;
+        state.phone = action.payload.phone;
+        state.role = action.payload.role;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload as string;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.email = null;
+        state.phone = null;
+        state.role = null;
+        state.status = 'idle';
       });
   },
 });
 
-export const { logout } = userSlice.actions;
-
+export const { initializeUser } = userSlice.actions;
 export default userSlice.reducer;
