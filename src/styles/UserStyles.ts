@@ -36,3 +36,29 @@ export const UserDetail = styled.p`
   font-size: 0.875rem;
   color: #6c757d;
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+`;
+
+export const Button = styled.button`
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+`;
