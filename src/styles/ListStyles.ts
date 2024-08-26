@@ -6,7 +6,7 @@ export const PageWrapper = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: #B0B3B8;
+  background-color: #B3C1D1;
 `;
 
 export const ChatListPageContainer = styled.div`
@@ -42,7 +42,7 @@ export const ChatListContainer = styled.div`
 export const SubscribedChatListContainer = styled.div`
   flex: 1.5; /* 2 */
   margin: 0.5rem;
-  background-color: #e9ecef;
+  background-color: #f1f3f5;
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

@@ -5,11 +5,12 @@ export const UserContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 0.25rem;
   background-color: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
+  margin: 0.25rem;
+  width: 100%;
 `;
 
 export const ProfileImage = styled.img`
