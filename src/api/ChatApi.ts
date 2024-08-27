@@ -43,7 +43,7 @@ export const setupInterceptors = (navigate: ReturnType<typeof useNavigate>) => {
 };
 
 export const createOpenChat = (data: { title: string; maxPersonnel: number })  => 
-    api.post('open-chats/create')
+    api.post('open-chats/create', data)
 
 export const getAllOpenChats = () =>
     api.get('/open-chats')
