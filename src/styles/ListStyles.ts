@@ -33,7 +33,7 @@ export const UserProfileContainer = styled.div`
 export const ChatListContainer = styled.div`
   flex: 2.5; /* 3 */
   margin: 0.5rem;
-  background-color: #f1f3f5;
+  background-color: #f8f9fa;
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -42,7 +42,7 @@ export const ChatListContainer = styled.div`
 export const SubscribedChatListContainer = styled.div`
   flex: 1.5; /* 2 */
   margin: 0.5rem;
-  background-color: #f1f3f5;
+  background-color: #f8f9fa;
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

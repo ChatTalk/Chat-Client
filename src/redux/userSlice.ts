@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { signIn, signOut } from '../api/api'; 
+import { signIn, signOut } from '../api/AuthApi'; 
 
 interface UserState {
   email: string | null;
