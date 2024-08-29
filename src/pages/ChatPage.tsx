@@ -15,6 +15,7 @@ const ChatPage: React.FC = () => {
                     <UserProfile />
                 </UserProfileContainer>
                 <ChatContainer>
+                    <h2>Chat</h2>
                     <Chat />
                 </ChatContainer>
                 <ParticipatedUsersContainer>

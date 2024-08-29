@@ -32,12 +32,14 @@ export const ChatContainer = styled.div`
 `;
 
 export const ChatMessagesContainer = styled.div`
-  flex-grow: 1;
-  padding: 1rem;
-  background-color: #fafafa;
-  border-radius: 8px;
+  padding: 0.25rem;
+  margin: 0.25rem 0.25rem 1rem 0.25rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 300px;
+  max-height: 300px;
   overflow-y: auto;
-  margin-bottom: 1rem;
+  background-color: #e0e0e0; /* 기존 회색보다 조금 더 밝은 색상 */
+  border-radius: 8px;
 `;
 
 export const ChatInputContainer = styled.div`

@@ -15,7 +15,7 @@ const ChatListPage: React.FC = () => {
                     <OpenChat />
                 </ChatListContainer>
                 <SubscribedChatListContainer>
-                    <h2>Subscribed Chat List</h2>
+                    <h2>Subscribed</h2>
                     {/* SubscribedChatList 컴포넌트 자리 */}
                 </SubscribedChatListContainer>
             </ChatListPageContainer>
