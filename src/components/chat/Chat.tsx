@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ChatInputContainer, ChatMessagesContainer } from "../../styles/ChatStyles"
 import ChatMessageList from "./ChatMessageList";
 import { ChatMessageDTO } from "../../styles/MessageTypes";
@@ -34,8 +34,6 @@ const Chat: React.FC = () => {
             createdAt: new Date().toISOString(),
         },
     ];
-
-    // const [messages, setMessages] = useState<ChatMessageDTO[]>(dummyMessages);
 
     return (
         <>
