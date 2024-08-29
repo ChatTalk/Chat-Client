@@ -46,4 +46,4 @@ export const createOpenChat = (data: { title: string; maxPersonnel: number })  =
     api.post('open-chats/create', data)
 
 export const getAllOpenChats = () =>
-    api.get('/open-chats')
+    api.get('open-chats')

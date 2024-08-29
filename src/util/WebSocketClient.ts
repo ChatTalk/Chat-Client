@@ -1,41 +1,61 @@
-import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
+import { ChatMessageDTO } from '../styles/MessageTypes';
 
-const SOCKET_ENDPOINT = '/stomp/chat'; // 웹소켓 엔드포인트
-const CHAT_DESTINATION = '/sub/chat'; // 웹소켓 구독 주소
+let stompClient: any = null;
 
-let client: Client | null = null;
+let endpoint: string | undefined = process.env.REACT_APP_API_BASE_URL
+endpoint = endpoint?.slice(0, -4)
 
-export const initializeWebSocketClient = (onMessageReceived: (message: any) => void) => {
-    client = new Client({
-        brokerURL: SOCKET_ENDPOINT,
-        connectHeaders: {},
-        debug: (str) => console.log(str),
-        reconnectDelay: 5000,
-        heartbeatIncoming: 4000,
-        heartbeatOutgoing: 4000,
-        onConnect: () => {
-            console.log('웹소켓 연결됨');
-            client?.subscribe(CHAT_DESTINATION, (message) => {
-                if (message.body) {
-                    onMessageReceived(JSON.parse(message.body));
-                }
-            });
-        },
-        onStompError: (frame) => {
-            console.error('브로커로부터 에러 보고:', frame.headers['message']);
-            console.error('추가 에러 관련 내용:', frame.body);
-        },
-        webSocketFactory: () => new SockJS(SOCKET_ENDPOINT),
-    });
+export const initializeWebSocketClient = (
+    chatId: string,
+    onMessage: (message: ChatMessageDTO) => void
+) => {
+    const sockJs = new SockJS(endpoint + '/stomp/chat');
+    stompClient = Stomp.over(sockJs);
+
+    // 쿠키에서 토큰 추출
+    const accessToken = document.cookie.split('Bearer%20')[1];
     
-    client.activate();
+    stompClient.connect(
+        { Authorization: `Bearer ${accessToken}` },
+        () => {
+            stompClient.subscribe(`/sub/chat/auctions/${chatId}`, (chat: any) => {
+                const message = JSON.parse(chat.body);
+                onMessage(message);
+            });
+
+            stompClient.send(
+                '/send/chat/enter',
+                {},
+                JSON.stringify({
+                    chatId: chatId
+                })
+            );
+        }
+    );
+
+    return stompClient;
 };
 
-export const sendMessage = (destination: string, body: any) => {
-    if (client && client.connected) {
-        client.publish({ destination, body: JSON.stringify(body) });
-    } else {
-        console.warn('웹소켓 클라이언트 연결이 안 되어 있음');
+export const sendMessage = (
+    chatId: string,
+    message: string
+) => {
+    if (stompClient) {
+        stompClient.send(
+            '/send/chat/message',
+            {},
+            JSON.stringify({
+                chatId: chatId,
+                message: message
+            })
+        );
+    }
+};
+
+export const deactivate = () => {
+    if (stompClient) {
+        stompClient.disconnect();
     }
 };
