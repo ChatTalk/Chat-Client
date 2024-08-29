@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../redux/hooks';
+import { clearChat, setChat } from '../../redux/chatSlice';
 import { ChatCreateButtonContainer, OpenChatListContainer, ChatCardContainer, StyledButton } from '../../styles/ChatListStyles';
 import { createOpenChat, getAllOpenChats } from '../../api/ChatApi';
 
@@ -13,6 +15,7 @@ interface ChatInfo {
 const OpenChat: React.FC = () => {
     const [chats, setChats] = useState<ChatInfo[]>([]);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch(); // 디스패치 훅 사용
 
     useEffect(() => {
         const fetchChats = async () => {
@@ -25,8 +28,14 @@ const OpenChat: React.FC = () => {
             }
         };
 
+        dispatch(clearChat());
         fetchChats();
-    }, []);
+    }, [dispatch]);
+
+    const handleChatClick = (chat: ChatInfo) => {
+        dispatch(setChat(chat)); // 클릭한 채팅 데이터를 리덕스 상태에 저장
+        navigate(`/chat/${chat.chatId}`);
+    };
 
     const handleCreateChat = async () => {
         try {
@@ -58,15 +67,11 @@ const OpenChat: React.FC = () => {
         }
     };
 
-    const handleChatClick = (chatId: string) => {
-        navigate(`/chat/${chatId}`);
-    };
-
     return (
         <>
             <OpenChatListContainer>
                 {chats.map((chat) => (
-                    <ChatCardContainer key={chat.chatId} onClick={() => handleChatClick(chat.chatId)}>
+                    <ChatCardContainer key={chat.chatId} onClick={() => handleChatClick(chat)}>
                         <h4>{chat.title}</h4>
                         <p>Host: {chat.openUsername}</p>
                         <p>Max Personnel: {chat.maxPersonnel}</p>
