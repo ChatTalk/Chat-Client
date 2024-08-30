@@ -15,6 +15,7 @@ const Chat: React.FC = () => {
 
     useEffect(() => {
         const stompClient = initializeWebSocketClient(chatId, (message: ChatMessageDTO) => {
+            console.log("받은 메세지: " + message.message)
             setMessages(prevMessages => [...prevMessages, message]);
         });
 

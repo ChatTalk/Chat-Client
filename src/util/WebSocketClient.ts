@@ -20,7 +20,7 @@ export const initializeWebSocketClient = (
     stompClient.connect(
         { Authorization: `Bearer ${accessToken}` },
         () => {
-            stompClient.subscribe(`/sub/chat/auctions/${chatId}`, (chat: any) => {
+            stompClient.subscribe(`/sub/chat/${chatId}`, (chat: any) => {
                 const message = JSON.parse(chat.body);
                 onMessage(message);
             });
