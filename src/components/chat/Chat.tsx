@@ -6,22 +6,22 @@ import { useAppSelector } from '../../redux/hooks';
 import { deactivate, initializeWebSocketClient, sendMessage } from "../../util/WebSocketClient";
 import { ChatMessageDTO } from "../../styles/MessageTypes";
 import { RootState } from "../../redux/store";
+import { useNavigate } from "react-router-dom";
 
 const Chat: React.FC = () => {
     const [messages, setMessages] = useState<ChatMessageDTO[]>([]);
     const [inputMessage, setInputMessage] = useState<string>("");
+
     const chatId = useAppSelector((state: RootState) => state.chat.chatId);
+    const navigate = useNavigate()
     // const username = useAppSelector((state: RootState) => state.user.email);
 
     useEffect(() => {
-        const stompClient = initializeWebSocketClient(chatId, (message: ChatMessageDTO) => {
+        initializeWebSocketClient(chatId, (message: ChatMessageDTO) => {
             console.log("받은 메세지: " + message.message)
             setMessages(prevMessages => [...prevMessages, message]);
         });
 
-        return () => {
-            deactivate();
-        };
     }, [chatId]);
 
     const handleSendMessage = () => {
@@ -34,6 +34,11 @@ const Chat: React.FC = () => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputMessage(e.target.value);
     };
+
+    const handleLeave = () => {
+        deactivate(chatId);
+        navigate("/")
+    }
     
     return (
         <>
@@ -49,6 +54,7 @@ const Chat: React.FC = () => {
                     placeholder="Type your message..."
                 />
                 <button onClick={handleSendMessage}>Send</button>
+                <button onClick={handleLeave}>Leave</button>
             </ChatInputContainer>
         </>
     )

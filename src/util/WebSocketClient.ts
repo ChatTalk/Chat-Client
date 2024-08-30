@@ -54,8 +54,16 @@ export const sendMessage = (
     }
 };
 
-export const deactivate = () => {
+export const deactivate = (chatId: string) => {
     if (stompClient) {
+        stompClient.send(
+            '/send/chat/leave',
+            {},
+            JSON.stringify({
+                chatId: chatId
+            })
+        );
+
         stompClient.disconnect();
     }
 };

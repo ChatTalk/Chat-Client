@@ -52,7 +52,8 @@ export const ChatInputContainer = styled.div`
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-right: 0.5rem;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
   }
   
   button {
@@ -62,6 +63,8 @@ export const ChatInputContainer = styled.div`
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
     
     &:hover {
       background-color: #0056b3;
