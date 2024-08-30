@@ -65,5 +65,6 @@ export const deactivate = (chatId: string) => {
         );
 
         stompClient.disconnect();
+        localStorage.removeItem("chat")
     }
 };

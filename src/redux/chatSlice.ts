@@ -7,7 +7,8 @@ interface ChatState {
     maxPersonnel: number;
 }
 
-const initialState: ChatState = {
+const savedChat = localStorage.getItem("chat");
+const initialState: ChatState = savedChat ? JSON.parse(savedChat) : {
     chatId: '',
     title: '',
     openUsername: '',
@@ -23,12 +24,16 @@ const chatSlice = createSlice({
             state.title = action.payload.title;
             state.openUsername = action.payload.openUsername;
             state.maxPersonnel = action.payload.maxPersonnel;
+
+            localStorage.setItem("chat", JSON.stringify(state));
         },
         clearChat(state) {
             state.chatId = '';
             state.title = '';
             state.openUsername = '';
             state.maxPersonnel = 0;
+
+            localStorage.removeItem("chat");
         },
     },
 });

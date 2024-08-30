@@ -2,31 +2,30 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { ChatInputContainer, ChatMessagesContainer } from "../../styles/ChatStyles"
 import ChatMessageList from "./ChatMessageList";
 import { useAppSelector } from '../../redux/hooks';
-// import { dummyMessages } from "../../util/Dummys";
 import { deactivate, initializeWebSocketClient, sendMessage } from "../../util/WebSocketClient";
 import { ChatMessageDTO } from "../../styles/MessageTypes";
 import { RootState } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
 
+
 const Chat: React.FC = () => {
     const [messages, setMessages] = useState<ChatMessageDTO[]>([]);
     const [inputMessage, setInputMessage] = useState<string>("");
 
-    const chatId = useAppSelector((state: RootState) => state.chat.chatId);
+    const chat = useAppSelector((state: RootState) => state.chat);
     const navigate = useNavigate()
-    // const username = useAppSelector((state: RootState) => state.user.email);
 
     useEffect(() => {
-        initializeWebSocketClient(chatId, (message: ChatMessageDTO) => {
+        initializeWebSocketClient(chat.chatId, (message: ChatMessageDTO) => {
             console.log("받은 메세지: " + message.message)
             setMessages(prevMessages => [...prevMessages, message]);
         });
 
-    }, [chatId]);
+    }, [chat]);
 
     const handleSendMessage = () => {
         if (inputMessage.trim()) {
-            sendMessage(chatId, inputMessage);
+            sendMessage(chat.chatId, inputMessage);
             setInputMessage("");
         }
     };
@@ -36,7 +35,8 @@ const Chat: React.FC = () => {
     };
 
     const handleLeave = () => {
-        deactivate(chatId);
+        deactivate(chat.chatId);
+        localStorage.removeItem("chat");
         navigate("/")
     }
     

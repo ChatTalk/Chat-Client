@@ -10,7 +10,7 @@ import { RootState } from "../redux/store";
 const ChatPage: React.FC = () => {
     // const { chatId } = useParams<{ chatId: string }>(); // URL 파라미터에서 chatId 추출
     const chat = useSelector((state: RootState) => state.chat);
-  
+    
     return (
         <PageWrapper>
             <ChatListPageContainer>
