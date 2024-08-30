@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import AuthPage from './pages/AuthPage';
 import GlobalStyles from './styles/GlobalStyles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import TestPage from './pages/TestPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { useAppDispatch } from './redux/hooks';
 import { initializeUser } from './redux/userSlice';
+import ChatListPage from './pages/ChatListPage';
+import ChatPage from './pages/ChatPage';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -27,7 +28,15 @@ const App: React.FC = () => {
           path="/"
           element={
             <ProtectedRoute>
-              <TestPage />
+              <ChatListPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/chat/:chatId"
+          element={
+            <ProtectedRoute>
+              <ChatPage />
             </ProtectedRoute>
           }
         />
