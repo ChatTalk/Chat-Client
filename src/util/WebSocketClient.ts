@@ -18,7 +18,7 @@ export const initializeWebSocketClient = (
     const accessToken = document.cookie.split('Bearer%20')[1];
     
     stompClient.connect(
-        { Authorization: `Bearer%20${accessToken}` },
+        { Authorization: `Bearer ${accessToken}` },
         () => {
             stompClient.subscribe(`/sub/chat/${chatId}`, (chat: any) => {
                 const message = JSON.parse(chat.body);
