@@ -59,8 +59,13 @@ const OpenChat: React.FC = () => {
             }
 
             if (title && maxPersonnel) {
-                await createOpenChat({ title, maxPersonnel });
+                const response = await createOpenChat({ title, maxPersonnel });
+                const createdChat = response.data;
+                console.log("받아온 데이터: " + createdChat.chatId);
                 alert('채팅방이 생성됐습니다.');
+                dispatch(setChat(createdChat));
+                localStorage.setItem("chat", JSON.stringify(createdChat))
+                navigate(`/chat/${createdChat.chatId}`)
             }
         } catch (error) {
             console.error('Error creating chat:', error);
