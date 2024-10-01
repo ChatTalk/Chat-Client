@@ -29,7 +29,7 @@ const SubscribeChat: React.FC = () => {
         };
 
         fetchSubscribeChats();
-    })
+    }, []);
 
     const handleChatClick = (chat: ChatInfo) => {
         dispatch(setChat(chat)); // 클릭한 채팅 데이터를 리덕스 상태에 저장
