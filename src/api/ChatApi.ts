@@ -47,3 +47,6 @@ export const createOpenChat = (data: { title: string; maxPersonnel: number })  =
 
 export const getAllOpenChats = () =>
     api.get('open-chats')
+
+export const getSubscribedOpenChats = () =>
+    api.get('open-chats/subscribe')
