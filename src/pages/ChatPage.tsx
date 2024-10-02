@@ -6,10 +6,19 @@ import { ChatListPageContainer, PageWrapper } from "../styles/ListStyles";
 import Chat from "../components/chat/Chat";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { useNavigate } from "react-router-dom";
+import { justUnreadChats } from "../api/ChatApi";
 
 const ChatPage: React.FC = () => {
     // const { chatId } = useParams<{ chatId: string }>(); // URL 파라미터에서 chatId 추출
     const chat = useSelector((state: RootState) => state.chat);
+    const navigate = useNavigate()
+
+    const handleGoToListClick = () => {
+        justUnreadChats(chat.chatId);
+        localStorage.removeItem("chat");
+        navigate("/")
+    }
     
     return (
         <PageWrapper>
@@ -24,7 +33,7 @@ const ChatPage: React.FC = () => {
                             <p>Host: {chat.openUsername}</p>
                         </div>
                         <div>
-                            <button>Go to List</button>
+                            <button onClick={handleGoToListClick}>Go to List</button>
                         </div>
                     </Header>
                     <Chat />

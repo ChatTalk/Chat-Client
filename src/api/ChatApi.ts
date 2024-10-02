@@ -50,3 +50,7 @@ export const getAllOpenChats = () =>
 
 export const getSubscribedOpenChats = () =>
     api.get('open-chats/subscribe')
+
+export const justUnreadChats = (chatId: string) => {
+    api.put(`message/${chatId}`)
+}
