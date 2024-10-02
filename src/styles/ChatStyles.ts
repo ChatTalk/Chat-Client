@@ -80,3 +80,9 @@ export const ParticipatedUsersContainer = styled.div`
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `
+
+export const Header = styled.div`
+    display: flex; /* 가로 방향으로 배치 */
+    justify-content: space-between; /* 요소 간 간격 분배 */
+    align-items: center; /* 요소 세로 중앙 정렬 */
+`;

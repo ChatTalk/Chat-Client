@@ -1,6 +1,6 @@
 import React from "react";
 import UserProfile from "../components/user/UserProfile";
-import { ChatContainer, UserProfileContainer, ParticipatedUsersContainer } from "../styles/ChatStyles";
+import { ChatContainer, UserProfileContainer, ParticipatedUsersContainer, Header } from "../styles/ChatStyles";
 // import { useParams } from "react-router-dom";
 import { ChatListPageContainer, PageWrapper } from "../styles/ListStyles";
 import Chat from "../components/chat/Chat";
@@ -18,8 +18,15 @@ const ChatPage: React.FC = () => {
                     <UserProfile />
                 </UserProfileContainer>
                 <ChatContainer>
-                    <h2>{chat.title}</h2>
-                    <p>Host: {chat.openUsername}</p>
+                    <Header>
+                        <div>
+                            <h2>{chat.title}</h2>
+                            <p>Host: {chat.openUsername}</p>
+                        </div>
+                        <div>
+                            <button>Go to List</button>
+                        </div>
+                    </Header>
                     <Chat />
                 </ChatContainer>
                 <ParticipatedUsersContainer>
