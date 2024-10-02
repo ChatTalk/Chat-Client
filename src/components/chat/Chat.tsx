@@ -6,14 +6,30 @@ import { deactivate, initializeWebSocketClient, sendMessage } from "../../util/W
 import { ChatMessageDTO } from "../../styles/MessageTypes";
 import { RootState } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
+import { getUnreadMessages } from "../../api/ChatApi";
 
 
 const Chat: React.FC = () => {
     const [messages, setMessages] = useState<ChatMessageDTO[]>([]);
+    const [unreadMessages, setUnreadMessages] = useState<ChatMessageDTO[]>([]);
     const [inputMessage, setInputMessage] = useState<string>("");
 
     const chat = useAppSelector((state: RootState) => state.chat);
     const navigate = useNavigate()
+
+    useEffect(() => {
+        const fetchUnreadMessages = async (chatId: string) => {
+            try {
+                const response = await getUnreadMessages(chatId);
+                const unreadMessages = response.data;
+                setUnreadMessages(unreadMessages); // 메시지 상태 업데이트
+            } catch (error) {
+                console.error("Error fetching unread messages:", error);
+            }
+        };
+
+        fetchUnreadMessages(chat.chatId);
+    }, [chat]);
 
     useEffect(() => {
         initializeWebSocketClient(chat.chatId, (message: ChatMessageDTO) => {
@@ -44,6 +60,7 @@ const Chat: React.FC = () => {
         <>
             <ChatMessagesContainer>
             {/* 여기에 메시지 리스트를 표시 */}
+                <ChatMessageList messages={unreadMessages} />
                 <ChatMessageList messages={messages} />
             </ChatMessagesContainer>
             <ChatInputContainer>
