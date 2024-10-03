@@ -52,7 +52,7 @@ export const getSubscribedOpenChats = () =>
     api.get('open-chats/subscribe')
 
 export const getUnreadMessages = (chatId: string) => 
-    api.get(`message/${chatId}`)
+    api.get(`open-chats/read/${chatId}`)
 
 export const justUnreadChats = (chatId: string) => 
-    api.put(`message/${chatId}`)
+    api.put(`open-chats/read/${chatId}`)
