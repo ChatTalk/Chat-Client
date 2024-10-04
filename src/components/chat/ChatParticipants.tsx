@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { RootState } from "../../redux/store";
 import { useAppSelector } from "../../redux/hooks";
 import { ReadUsersContainer, ParticipantContainer } from "../../styles/ChatStyles";
-import { EventSourcePolyfill } from "event-source-polyfill";
+// import { EventSourcePolyfill } from "event-source-polyfill";
 
 interface UserReadDTO {
     email: string;
