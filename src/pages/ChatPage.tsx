@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useNavigate } from "react-router-dom";
 import { justUnreadChats } from "../api/ChatApi";
+import ChatParticipants from "../components/chat/ChatParticipants";
 
 const ChatPage: React.FC = () => {
     // const { chatId } = useParams<{ chatId: string }>(); // URL 파라미터에서 chatId 추출
@@ -39,8 +40,9 @@ const ChatPage: React.FC = () => {
                     <Chat />
                 </ChatContainer>
                 <ParticipatedUsersContainer>
-                    <h2>Participated Users</h2>
+                    <h2>Participants</h2>
                     <p>Max Personnel: {chat.maxPersonnel}</p>
+                    <ChatParticipants />
                 </ParticipatedUsersContainer>
             </ChatListPageContainer>
         </PageWrapper>
