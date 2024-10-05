@@ -41,18 +41,32 @@ const ChatParticipants :React.FC = () => {
         };
     }, [chat]);
 
-    const sortedParticipants = participants.sort((a, b) => (a.isRead === b.isRead ? 0 : a.isRead ? -1 : 1));
-
+    const { readParticipants, unreadParticipants } = participants.reduce((acc, participant) => {
+        if (participant.isRead) {
+            acc.readParticipants.push(participant);
+        } else {
+            acc.unreadParticipants.push(participant);
+        }
+        return acc;
+    }, { readParticipants: [] as UserReadDTO[], unreadParticipants: [] as UserReadDTO[] });
 
     return (
         <ReadUsersContainer>
-            {sortedParticipants.map((user, index) => (
+            <p>Participants</p>
+            {readParticipants.map((user, index) => (
+                <ParticipantContainer key={index} isRead={user.isRead}>
+                    {user.email}
+                </ParticipantContainer>
+            ))}
+
+            <p>Non Participants</p>
+            {unreadParticipants.map((user, index) => (
                 <ParticipantContainer key={index} isRead={user.isRead}>
                     {user.email}
                 </ParticipantContainer>
             ))}
         </ReadUsersContainer>
-    )
+    );
 }
 
 export default ChatParticipants;
