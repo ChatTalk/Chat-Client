@@ -24,7 +24,7 @@ const UserProfile: React.FC = () => {
   
     return (
       <UserContainer>
-          <ProfileImage src="path_to_profile_image" alt="Profile" /> {/* 서버에 저장된 프로필 이미지로 대체 */}
+          <ProfileImage src="../../chatLogo.png" alt="chatLogo" /> {/* 서버에 저장된 프로필 이미지로 대체 */}
             <UserInfo>
                 <UserName>{user.email}</UserName>
                 <UserDetail>Phone: {user.phone}</UserDetail>
