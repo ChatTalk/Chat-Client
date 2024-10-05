@@ -1,4 +1,5 @@
 import OpenChat from "../components/chat/OpenChat";
+import SubscribeChat from "../components/user/SubscribeChat";
 import UserProfile from "../components/user/UserProfile";
 import { ChatListContainer, ChatListPageContainer, PageWrapper, SubscribedChatListContainer, UserProfileContainer } from "../styles/ListStyles";
 
@@ -16,7 +17,7 @@ const ChatListPage: React.FC = () => {
                 </ChatListContainer>
                 <SubscribedChatListContainer>
                     <h2>Subscribed</h2>
-                    {/* SubscribedChatList 컴포넌트 자리 */}
+                    <SubscribeChat />
                 </SubscribedChatListContainer>
             </ChatListPageContainer>
         </PageWrapper>

@@ -24,3 +24,9 @@ export interface EnterMessageDTO {
 export interface LeaveMessageDTO {
     chatId: string;
 }
+
+// 구독자 관리 현황
+export interface UserReadDTO {
+    email: string;
+    isRead: boolean;
+}

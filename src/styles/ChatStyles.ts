@@ -80,3 +80,30 @@ export const ParticipatedUsersContainer = styled.div`
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `
+
+export const Header = styled.div`
+  display: flex; /* 가로 방향으로 배치 */
+  justify-content: space-between; /* 요소 간 간격 분배 */
+  align-items: center; /* 요소 세로 중앙 정렬 */
+`;
+
+export const ReadUsersContainer = styled.div`
+  padding: 0.25rem;
+  margin: 0.25rem 0.25rem 1rem 0.25rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 300px;
+  max-height: 300px;
+  overflow-y: auto;
+  // background-color: #e0e0e0; /* 기존 회색보다 조금 더 밝은 색상 */
+  border-radius: 8px;
+`;
+
+export const ParticipantContainer = styled.div<{ isRead: boolean }>`
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  border-radius: 6px;
+  background-color: ${({ isRead }) => (isRead ? '#d0f0c0' : '#f0d0d0')};
+  // filter: ${({ isRead }) => (isRead ? 'none' : 'blur(2px)')};
+  transition: background-color 0.3s, filter 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
