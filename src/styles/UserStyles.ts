@@ -16,9 +16,10 @@ export const UserContainer = styled.div`
 export const ProfileImage = styled.img`
   width: 60px;
   height: 60px;
-  border-radius: 50%;
+  // border-radius: 50%;
   object-fit: cover;
-  background-color: #007bff;
+  // background-color: #007bff;
+  margin-bottom: 0.5rem;
 `;
 
 export const UserInfo = styled.div`
