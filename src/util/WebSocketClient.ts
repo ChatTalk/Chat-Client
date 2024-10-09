@@ -2,7 +2,13 @@ import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import { ChatMessageDTO } from '../styles/MessageTypes';
 
+interface UserReadDTO {
+    email: string;
+    isRead: boolean;
+}
+
 let stompClient: any = null;
+let particpantStompClient:any = null;
 
 let endpoint: string | undefined = process.env.REACT_APP_API_BASE_URL
 endpoint = endpoint?.slice(0, -4)
@@ -54,6 +60,42 @@ export const sendMessage = (
     }
 };
 
+
+export const initializeParticipantClient = (
+    chatId: string,
+    onMessage: (message: UserReadDTO[]) => void
+) => {
+    const sockJs = new SockJS(endpoint + `/stomp/participant`);
+    particpantStompClient = Stomp.over(sockJs);
+
+    // 쿠키에서 토큰 추출
+    // const accessToken = document.cookie.split('Bearer%20')[1];
+
+    particpantStompClient.connect(
+        // { Authorization: `Bearer ${accessToken}` },
+        {}, // 빈 헤더라도 넘겨줘야 함
+        () => {
+            particpantStompClient.subscribe(`/sub/participant/${chatId}`, (participants: any) => {
+                const message = JSON.parse(participants.body);
+                onMessage(message);
+            });
+        }
+    );
+
+    return particpantStompClient;
+};
+
+export const justLeave = (chatId: string) => {
+    if (stompClient) {
+        stompClient.disconnect();
+        localStorage.removeItem("chat")
+    }
+
+    if (particpantStompClient) {
+        particpantStompClient.disconnect();
+    }
+};
+
 export const deactivate = (chatId: string) => {
     if (stompClient) {
         stompClient.send(
@@ -66,5 +108,9 @@ export const deactivate = (chatId: string) => {
 
         stompClient.disconnect();
         localStorage.removeItem("chat")
+    }
+
+    if (particpantStompClient) {
+        particpantStompClient.disconnect();
     }
 };
