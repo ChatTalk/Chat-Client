@@ -9,6 +9,7 @@ import { RootState } from "../redux/store";
 import { useNavigate } from "react-router-dom";
 import { justUnreadChats } from "../api/ChatApi";
 import ChatParticipants from "../components/chat/ChatParticipants";
+import { justLeave } from "../util/WebSocketClient";
 
 const ChatPage: React.FC = () => {
     // const { chatId } = useParams<{ chatId: string }>(); // URL 파라미터에서 chatId 추출
@@ -17,6 +18,7 @@ const ChatPage: React.FC = () => {
 
     const handleGoToListClick = () => {
         justUnreadChats(chat.chatId);
+        justLeave(chat.chatId);
         localStorage.removeItem("chat");
         navigate("/")
     }
