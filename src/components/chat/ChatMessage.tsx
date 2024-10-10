@@ -8,7 +8,7 @@ interface ChatMessageCardProps {
 
 const ChatMessage: React.FC<ChatMessageCardProps> = ({ message }) => {
     const localUser = JSON.parse(localStorage.getItem('user') || '{}');
-    const isOwnMessage = localUser.email
+    const isOwnMessage = localUser.email === message.username;
     const isMessageType = message.type === "MESSAGE";
 
     // 입장/퇴장 메시지 처리
