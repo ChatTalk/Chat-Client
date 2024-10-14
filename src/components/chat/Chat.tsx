@@ -53,6 +53,7 @@ const Chat: React.FC = () => {
     const handleLeave = () => {
         deactivate(chat.chatId);
         localStorage.removeItem("chat");
+        alert("채팅방에서 퇴장했습니다")
         navigate("/")
     }
     
