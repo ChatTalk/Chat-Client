@@ -9,6 +9,7 @@ interface ChatInfo {
     chatId: string;
     title: string;
     openUsername: string;
+    personnel: number;
     maxPersonnel: number;
 }
 
