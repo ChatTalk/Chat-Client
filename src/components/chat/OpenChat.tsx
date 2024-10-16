@@ -9,6 +9,7 @@ interface ChatInfo {
     chatId: string;
     title: string;
     openUsername: string;
+    personnel: number;
     maxPersonnel: number;
 }
   
@@ -80,7 +81,7 @@ const OpenChat: React.FC = () => {
                     <ChatCardContainer key={chat.chatId} onClick={() => handleChatClick(chat)}>
                         <h4>{chat.title}</h4>
                         <p>Host: {chat.openUsername}</p>
-                        <p>Max Personnel: {chat.maxPersonnel}</p>
+                        <p>{chat.personnel} / {chat.maxPersonnel}</p>
                     </ChatCardContainer>
                 ))}
             </OpenChatListContainer>
